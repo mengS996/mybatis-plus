@@ -15,6 +15,7 @@ import lombok.Data;
 @Data
 //@TableName(value="t_user")
 public class User {
+    //实现自增序列id自动插入的功能
     @TableId
     private Long id;
     private String name;
