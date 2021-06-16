@@ -31,11 +31,12 @@ public class MapperTests {
     @Test
     public void testInsert(){
         User user = new User();
-        user.setName("Rose");
+        user.setName("Rose1");
         user.setAge(18);
         user.setEmail("rose@163.com");
-        user.setCreateTime(LocalDateTime.now());
-        user.setUpdateTime(LocalDateTime.now());
+        //注释掉，使用数据库添加CURRENT_TIMESTAMP
+        //user.setCreateTime(LocalDateTime.now());
+        //user.setUpdateTime(LocalDateTime.now());
         int insert = userMapper.insert(user);
         System.out.println("插入了"+insert+"条数据。");
     }
@@ -58,7 +59,7 @@ public class MapperTests {
     public void testUpdate(){
         User user = new User();
         user.setId(1L);
-        user.setAge(28);
+        user.setAge(18);
         //注意：update时生成的sql自动是动态sql,根据id修改age字段的值，name与email值没变。
         int result = userMapper.updateById(user);
         System.out.println("影响的行数：" + result);
