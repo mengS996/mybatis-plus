@@ -1,6 +1,7 @@
 package com.ms.mybatisplus.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -20,9 +21,11 @@ public class User {
     //实现自增序列id自动插入的功能
     @TableId
     private Long id;
+    //@TableField(value = "username")
     private String name;
     private Integer age;
     private String email;
+    //@TableField(value = "create_time")  不需要写，多此一举
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     //master修改

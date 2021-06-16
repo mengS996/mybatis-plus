@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -30,9 +31,11 @@ public class MapperTests {
     @Test
     public void testInsert(){
         User user = new User();
-        user.setName("james");
+        user.setName("Rose");
         user.setAge(18);
-        user.setEmail("james@163.com");
+        user.setEmail("rose@163.com");
+        user.setCreateTime(LocalDateTime.now());
+        user.setUpdateTime(LocalDateTime.now());
         int insert = userMapper.insert(user);
         System.out.println("插入了"+insert+"条数据。");
     }
