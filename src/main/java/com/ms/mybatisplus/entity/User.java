@@ -25,8 +25,12 @@ public class User {
     //@TableField(value = "create_time")  不需要写，多此一举
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
     //master修改
     //dev修改
     //pull测试
+    @TableLogic //逻辑删除
+    @TableField(value = "is_deleted")
+    private Integer deleted;
 }

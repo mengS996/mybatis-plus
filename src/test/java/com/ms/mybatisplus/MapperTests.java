@@ -59,14 +59,14 @@ public class MapperTests {
     public void testUpdate(){
         User user = new User();
         user.setId(1L);
-        user.setAge(18);
+        user.setAge(90);
         //注意：update时生成的sql自动是动态sql,根据id修改age字段的值，name与email值没变。
         int result = userMapper.updateById(user);
         System.out.println("影响的行数：" + result);
     }
     @Test
     public void testDelete(){
-        int result = userMapper.deleteById(5);
+        int result = userMapper.deleteById(1397788416878899204L);
         System.out.println("影响的行数：" + result);
     }
     @Test
