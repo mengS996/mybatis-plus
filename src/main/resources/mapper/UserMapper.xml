@@ -11,4 +11,10 @@
         from user
         where name= #{name}
     </select>
+
+    <select id="selectPageByPage" resultType="com.ms.mybatisplus.entity.User">
+        select <include refid="Base_Column_List"></include>
+        from user
+        where age > #{age}
+    </select>
 </mapper>
