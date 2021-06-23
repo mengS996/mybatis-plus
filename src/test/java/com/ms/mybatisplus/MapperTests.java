@@ -1,6 +1,8 @@
 package com.ms.mybatisplus;
 
+import com.ms.mybatisplus.entity.Product;
 import com.ms.mybatisplus.entity.User;
+import com.ms.mybatisplus.mapper.ProductMapper;
 import com.ms.mybatisplus.mapper.UserMapper;
 import com.ms.mybatisplus.mapper.UserMapper;
 import com.sun.xml.internal.fastinfoset.stax.factory.StAXOutputFactory;
@@ -27,6 +29,38 @@ import java.util.Map;
 public class MapperTests {
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private ProductMapper productMapper;
+
+    @Test
+    public void testConcurrentUpdate() {
+        //1、小李取数据 100
+        Product p1 = productMapper.selectById(1L);
+        //2、小王取数据 100
+        Product p2 = productMapper.selectById(1L);
+
+        //3、小李将价格加了50元，存入了数据库
+        p1.setPrice(p1.getPrice() + 50);
+        int result1 = productMapper.updateById(p1);
+        System.out.println("小李修改结果：" + result1);
+
+        //4、小王将商品减了30元，存入了数据库
+        p2.setPrice(p2.getPrice() - 30);
+        int result2 = productMapper.updateById(p2);
+        System.out.println("小王修改结果：" + result2);
+        if(result2==0){
+            //小王重新获取数据,此时price是150
+            p2=productMapper.selectById(1L);
+            p2.setPrice(p2.getPrice() - 30);//150-30
+            result2=productMapper.updateById(p2);  //更新到数据库
+        }
+        System.out.println("小王重新修改后结果：" + result2);
+
+        //最后的结果
+        Product p3 = productMapper.selectById(1L);
+        System.out.println("最后的结果：" + p3.getPrice());
+    }
 
     @Test
     public void testInsert(){
